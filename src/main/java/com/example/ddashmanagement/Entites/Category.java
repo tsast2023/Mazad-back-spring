@@ -15,6 +15,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
+
 @Document
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,6 +28,7 @@ public class Category {
     @Size(min = 0, max = 25, message = "La taille du champ doit être comprise entre 0 et 25 caractères.")
     private String libeléCategorie ;
     private Number NombreDesProduits ;
+    private Map<String , String> critere ;
     @DBRef
     private Collection<Product> products = new ArrayList<>() ;
     @DBRef
