@@ -19,16 +19,19 @@ public class CategoryService implements IServiceCategory {
 
     @Override
     public CategoryFille createCategorie(CategoryFille c) {
-        if(c.getCategoryparente().size()> 0){
-            c.setType(TypeCategory.CATEGORYFILLE);
-        } else if (c.getCategoryparente().size() == 0) {
+        if(c.getCategories().isEmpty()){
             c.setType(TypeCategory.CATEGORYPARENTE);
         }
-        return categoryFilleRepository.save(c);
+        else{
+            c.setType(TypeCategory.CATEGORYFILLE);
+        }
+      return categoryFilleRepository.save(c);
+
     }
 
     @Override
     public CategoryFille findCategorieById(String id) {
+
         return categoryFilleRepository.findById(id).get();
     }
 

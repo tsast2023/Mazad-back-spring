@@ -39,7 +39,9 @@ public class CategoryFille{
     @DBRef
     private Collection<Product> products = new ArrayList<>() ;
     @DBRef
-    private List<Category> Categoryparente ;
+    private Collection<Enchere> Enchere = new ArrayList<>() ;
+    @DBRef
+    private Collection<Category> categories = new ArrayList<>() ;
     private Map<String , String> critere ;
 
 
