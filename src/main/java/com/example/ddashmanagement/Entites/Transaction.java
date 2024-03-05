@@ -18,7 +18,7 @@ public class Transaction {
     @DBRef
     private Solde solde;
     @DBRef
-    private Acheteur_Vendeur Acheteur_vendeur ;
+    private Acheteur Acheteur_vendeur ;
     @DBRef
     private Administrateur administrateur ;
     private BigDecimal soldeTransferer ;

@@ -12,7 +12,7 @@ public class Ventes {
     private Product product ;
 
     @DBRef
-    private Acheteur_Vendeur Acheteur_Vendeur ;
+    private Acheteur Acheteur_Vendeur ;
 
     @CreatedDate
     private Instant createdAt;

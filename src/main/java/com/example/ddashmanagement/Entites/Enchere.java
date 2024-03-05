@@ -1,5 +1,6 @@
 package com.example.ddashmanagement.Entites;
 
+import com.example.ddashmanagement.Ennum.OffreEnchere;
 import com.example.ddashmanagement.Ennum.StatusEnchere;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -42,6 +43,8 @@ public class Enchere {
     private Date DatePublication ;
 
     private StatusEnchere Status ;
+
+    private OffreEnchere offre ;
 
 
 

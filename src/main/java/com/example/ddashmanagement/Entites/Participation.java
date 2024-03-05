@@ -10,7 +10,7 @@ public class Participation {
     @DBRef
     private Enchere enchere ;
     @DBRef
-    private Acheteur_Vendeur participants ;
+    private Acheteur participants ;
 
     @CreatedDate
     private Instant createdAt;

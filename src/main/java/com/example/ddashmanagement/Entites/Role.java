@@ -3,18 +3,16 @@ package com.example.ddashmanagement.Entites;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.math.BigDecimal;
-
 @Document
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-public class Solde {
-    private String id ;
-    private BigDecimal soldeMazed ;
-    private BigDecimal soldeAquisition ;
-    private Acheteur user ;
-
+public class Role {
+    @Id
+    private String id;
+    private String role;
+    // Getters et Setters
 }
