@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -24,12 +25,13 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@TypeAlias("user")
 public class User implements UserDetails {
     @Id
     private String Id ;
     private String nomFamille ;
-    private String Prenom ;
-    private String NumTel ;
+    private String prenom ;
+    private String numTel ;
     @Email
     private String email ;
     private String password ;

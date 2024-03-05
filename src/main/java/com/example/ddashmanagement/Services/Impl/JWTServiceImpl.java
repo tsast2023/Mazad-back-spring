@@ -1,5 +1,6 @@
 package com.example.ddashmanagement.Services.Impl;
 
+import com.example.ddashmanagement.Entites.User;
 import com.example.ddashmanagement.Services.JWTServices;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Function;
 
 @Service
@@ -26,6 +29,14 @@ public class JWTServiceImpl  implements JWTServices {
                 .compact();
 
     }
+    public String generateRefreshToken(Map<String , Object> extractClaims,UserDetails userDetails) {
+        return Jwts.builder().setClaims(extractClaims).setSubject(userDetails.getUsername())
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + 604800000))
+                .signWith(getSignInKey() , SignatureAlgorithm.HS256)
+                .compact();
+
+    }
     public String ExtractUsername(String token) {
          return extractClaim(token , Claims::getSubject);
     }
@@ -35,7 +46,7 @@ public class JWTServiceImpl  implements JWTServices {
 
     }
     private Key getSignInKey(){
-        byte[] key = Decoders.BASE64.decode("secretKey");
+        byte[] key = Decoders.BASE64.decode("162160f61c41977c51681746756d5de28f1b13879cef0d3b7ebd2b7724c2caf2cab46d16e67b187ccc7dc4f275ec916c7760b3a4544bd835b8829aa42c395ba7");
         return Keys.hmacShaKeyFor(key);
     }
     private Claims extractAllClaims(String token){
@@ -51,4 +62,6 @@ public class JWTServiceImpl  implements JWTServices {
       return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
 
     }
+
+
 }

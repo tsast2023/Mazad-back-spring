@@ -7,22 +7,21 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
+@TypeAlias("Vendeur")
 @Data
-@Document(collection = "vendeur")
-@NoArgsConstructor
-@AllArgsConstructor
 public class Vendeur extends User{
-    private String ImgCin;
-    private Integer Cin ;
-    private String Patente ;
-    private StatusVendeur Status;
+    private String imgCin;
+    private Integer cin ;
+    private String patente ;
+    private StatusVendeur status;
     private TypeVendeur type ;
-    private String NomSociete ;
-    private Date DateNaissance ;
+    private String nomSociete ;
+    private Date dateNaissance ;
     private String photoDeProfil ;
     private String SocketId ;
     @DBRef
