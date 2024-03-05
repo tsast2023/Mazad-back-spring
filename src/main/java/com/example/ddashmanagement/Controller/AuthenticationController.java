@@ -8,7 +8,6 @@ import com.example.ddashmanagement.Entites.User;
 import com.example.ddashmanagement.Services.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.web.authentication.session.RegisterSessionAuthenticationStrategy;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

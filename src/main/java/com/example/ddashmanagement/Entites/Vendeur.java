@@ -18,7 +18,7 @@ public class Vendeur extends User{
     private String imgCin;
     private Integer cin ;
     private String patente ;
-    private StatusVendeur status;
+    private StatusVendeur status = StatusVendeur.BLOQUER ;
     private TypeVendeur type ;
     private String nomSociete ;
     private Date dateNaissance ;

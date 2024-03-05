@@ -6,12 +6,9 @@ import com.example.ddashmanagement.Dto.SignInRequest;
 import com.example.ddashmanagement.Dto.SignUpRequest;
 import com.example.ddashmanagement.Ennum.RoleUser;
 import com.example.ddashmanagement.Entites.Acheteur;
-import com.example.ddashmanagement.Entites.Role;
 import com.example.ddashmanagement.Entites.User;
 import com.example.ddashmanagement.Entites.Vendeur;
-import com.example.ddashmanagement.Repository.AcheteurRepository;
 import com.example.ddashmanagement.Repository.UserRepository;
-import com.example.ddashmanagement.Repository.VendeurRepository;
 import com.example.ddashmanagement.Services.AuthenticationService;
 import com.example.ddashmanagement.Services.JWTServices;
 import lombok.RequiredArgsConstructor;
@@ -27,8 +24,6 @@ import java.util.HashMap;
 public class AuthenticationServiceImpl implements AuthenticationService {
 
     private final UserRepository userRepository;
-    private final AcheteurRepository acheteurRepository;
-    private final VendeurRepository vendeurRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager ;
     private final JWTServices jwtServices ;
@@ -76,10 +71,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         }
     }
     public JWTAuthenticationResponse SignIn(SignInRequest signInRequest) {
+        System.out.print("hello");
         authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(signInRequest.getEmail() , signInRequest.getPassword()));
+                .authenticate(new UsernamePasswordAuthenticationToken(signInRequest.getLogin() , signInRequest.getPassword()));
 
-        var user = userRepository.findByEmail(signInRequest.getEmail()).orElseThrow(() -> new IllegalArgumentException("Invalid Email or password"));
+        var user = userRepository.findByPseudoOrNumtel(signInRequest.getLogin() , signInRequest.getLogin()).orElseThrow(() -> new IllegalArgumentException("Invalid Email or password"));
+         System.out.print(user);
         var jwt = jwtServices.generateToken(user);
         var refreshToken = jwtServices.generateRefreshToken(new HashMap<>() , user);
         JWTAuthenticationResponse jwtAuthenticationResponse = new JWTAuthenticationResponse();
@@ -92,7 +89,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     public JWTAuthenticationResponse refreshToken(RefreshTokenRequest refreshTokenRequest) {
         String userEmail = jwtServices.ExtractUsername(refreshTokenRequest.getToken());
-        User user = userRepository.findByEmail(userEmail).orElseThrow();
+        User user = userRepository.findByPseudoOrNumtel(userEmail , userEmail).orElseThrow();
         if(jwtServices.isTokenValid(refreshTokenRequest.getToken() , user)){
             var jwt = jwtServices.generateToken(user);
             JWTAuthenticationResponse jwtAuthenticationResponse = new JWTAuthenticationResponse();

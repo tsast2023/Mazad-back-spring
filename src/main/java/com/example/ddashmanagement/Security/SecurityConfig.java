@@ -28,7 +28,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .authorizeHttpRequests(req -> req.requestMatchers("/api/auth/***").permitAll()
+                .authorizeHttpRequests(req -> req.requestMatchers("/api/auth/***" , "/api/category/getAll").permitAll()
                        .requestMatchers("/api/Admin").hasAuthority(RoleUser.Admin.name())
                         .requestMatchers("/api/Acheteur").hasAuthority(RoleUser.Acheteur.name())
                         .requestMatchers("/api/Vendeur").hasAuthority(RoleUser.Vendeur.name())

@@ -46,7 +46,7 @@ public class JWTServiceImpl  implements JWTServices {
 
     }
     private Key getSignInKey(){
-        byte[] key = Decoders.BASE64.decode("162160f61c41977c51681746756d5de28f1b13879cef0d3b7ebd2b7724c2caf2cab46d16e67b187ccc7dc4f275ec916c7760b3a4544bd835b8829aa42c395ba7");
+        byte[] key = Decoders.BASE64.decode(secretKey);
         return Keys.hmacShaKeyFor(key);
     }
     private Claims extractAllClaims(String token){
@@ -62,6 +62,4 @@ public class JWTServiceImpl  implements JWTServices {
       return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
 
     }
-
-
 }

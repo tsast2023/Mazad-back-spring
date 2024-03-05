@@ -55,7 +55,11 @@ public class User implements UserDetails {
     }
     @Override
     public String getUsername() {
-        return email ;
+        if (pseudo != null) {
+            return pseudo;
+        } else {
+            return numTel;
+        }
     }
 
     @Override
