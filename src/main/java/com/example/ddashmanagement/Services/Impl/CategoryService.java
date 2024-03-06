@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoryService implements IServiceCategory {
@@ -75,9 +77,15 @@ public class CategoryService implements IServiceCategory {
     }
 
     @Override
-    public List<CategoryFille> Filtre(StatusCategorie status, TypeCategory type, EtatCategory etat) {
-        return categoryFilleRepository.findCategoryFilleByEtatOrStatusOrType(status , type , etat);
+    public List<CategoryFille> findCategories
+            (Optional<EtatCategory> etat,
+             Optional<StatusCategorie> status,
+             Optional<TypeCategory> type) {
+        return categoryFilleRepository.findByCriteria(etat.orElse(null), type.orElse(null), status.orElse(null));
     }
+
+
+
 
 
 }

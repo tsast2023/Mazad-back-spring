@@ -7,6 +7,7 @@ import com.example.ddashmanagement.Entites.Category;
 import com.example.ddashmanagement.Entites.CategoryFille;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface IServiceCategory {
@@ -19,5 +20,5 @@ public interface IServiceCategory {
     public boolean categorieExists(String id);
 
     public void ChangerStatus(CategoryFille c);
-    public List<CategoryFille> Filtre(StatusCategorie status , TypeCategory type , EtatCategory etat);
+    List<CategoryFille> findCategories(Optional<EtatCategory> etat, Optional<StatusCategorie> status, Optional<TypeCategory> type);
 }

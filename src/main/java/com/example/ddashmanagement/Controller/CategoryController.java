@@ -7,9 +7,11 @@ import com.example.ddashmanagement.Entites.Category;
 import com.example.ddashmanagement.Entites.CategoryFille;
 import com.example.ddashmanagement.Services.IServiceCategory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/category")
@@ -26,12 +28,21 @@ public class CategoryController {
     public CategoryFille addCategorie(@RequestBody CategoryFille  categorie){
         return iServiceCategory.createCategorie(categorie);
     }
-    @GetMapping("/filtreCategory")
-    public List<CategoryFille> filter(@RequestBody StatusCategorie status ,@RequestBody TypeCategory type ,@RequestBody EtatCategory etat){
-        return iServiceCategory.Filtre(status , type , etat);
+    @GetMapping("/findCategories")
+    public ResponseEntity<List<CategoryFille>> findCategories(
+            @RequestParam(required = false) EtatCategory etat,
+            @RequestParam(required = false) StatusCategorie status,
+            @RequestParam(required = false) TypeCategory type) {
+
+        List<CategoryFille> categories = iServiceCategory.findCategories(Optional.of(etat), Optional.of(status), Optional.of(type));
+        if(categories.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(categories);
+        }
     }
     @PutMapping("/updateCategory")
-    public CategoryFille update(String id , CategoryFille c) {
+    public CategoryFille update(@RequestParam  String id , @RequestBody CategoryFille c) {
         return iServiceCategory.updateCategorie(id , c);
     }
 
