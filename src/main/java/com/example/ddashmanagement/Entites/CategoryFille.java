@@ -1,5 +1,7 @@
 package com.example.ddashmanagement.Entites;
 
+import com.example.ddashmanagement.Ennum.EtatCategory;
+import com.example.ddashmanagement.Ennum.StatusCategorie;
 import com.example.ddashmanagement.Ennum.TypeCategory;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -31,6 +33,8 @@ public class CategoryFille{
     private String libeléCategorie ;
     private TypeCategory type ;
     private Number NombreDesProduits ;
+    private StatusCategorie status ;
+    private EtatCategory etat ;
     @CreatedDate
     private Instant createdAt;
 
