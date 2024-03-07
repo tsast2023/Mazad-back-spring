@@ -28,13 +28,14 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .authorizeHttpRequests(req -> req.requestMatchers("/api/auth/***" , "/api/category/**").permitAll()
+                .authorizeHttpRequests(req -> req.requestMatchers("/api/auth/***" , "/api/category/**" , "/demandes/All").permitAll()
                        .requestMatchers("/api/Admin").hasAuthority(RoleUser.Admin.name())
                         .requestMatchers("/api/Acheteur").hasAuthority(RoleUser.Acheteur.name())
                         .requestMatchers("/api/Vendeur").hasAuthority(RoleUser.Vendeur.name())
                         .requestMatchers("/api/SupportAnalytics").hasAuthority(RoleUser.supportAnalytics.name())
                         .requestMatchers("/api/SupportEnchereProduit").hasAuthority(RoleUser.supportEnchereProduit.name())
                         .requestMatchers("/api/SupportUtilisateurTransaction").hasAuthority(RoleUser.supportUtilisateurTransaction.name())
+                        .requestMatchers("/api/category/changerStatus").authenticated()
                         .anyRequest().authenticated()
 
 

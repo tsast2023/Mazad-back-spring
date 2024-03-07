@@ -7,6 +7,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.xml.bind.DatatypeConverter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -45,10 +46,13 @@ public class JWTServiceImpl  implements JWTServices {
         return claimsResolvers.apply(claims);
 
     }
-    private Key getSignInKey(){
-        byte[] key = Decoders.BASE64.decode(secretKey);
-        return Keys.hmacShaKeyFor(key);
-    }
+
+        private Key getSignInKey() {
+        System.out.print("----"+secretKey+"----");
+            byte[] keyBytes = DatatypeConverter.parseHexBinary(secretKey);
+            return Keys.hmacShaKeyFor(keyBytes);
+        }
+
     private Claims extractAllClaims(String token){
        return Jwts.parser().setSigningKey(getSignInKey()).build().parseClaimsJws(token).getBody();
     }

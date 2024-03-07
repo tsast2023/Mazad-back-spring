@@ -4,10 +4,12 @@ import com.example.ddashmanagement.Ennum.EtatCategory;
 import com.example.ddashmanagement.Ennum.StatusCategorie;
 import com.example.ddashmanagement.Ennum.TypeCategory;
 import com.example.ddashmanagement.Entites.CategoryFille;
+import com.example.ddashmanagement.Entites.User;
 import com.example.ddashmanagement.Services.IServiceCategory;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,6 +51,11 @@ public class CategoryController {
     @PutMapping("/updateCategory")
     public CategoryFille update(@RequestParam  String id , @RequestBody CategoryFille c) {
         return iServiceCategory.updateCategorie(id , c);
+    }
+    @PostMapping("/changerStatus")
+    public String ChangeStaus(@RequestParam String id , @AuthenticationPrincipal User user){
+        return iServiceCategory.ChangerStatusDemande(id , user);
+
     }
 
 }
