@@ -21,7 +21,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 @Document
-@TypeAlias("categorieFille")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -45,7 +44,7 @@ public class CategoryFille{
     @DBRef
     private Collection<Enchere> Enchere = new ArrayList<>() ;
     @DBRef
-    private Collection<Category> categories = new ArrayList<>() ;
+    private Collection<CategoryFille> categories = new ArrayList<>() ;
     private Map<String , String> critere ;
 
 

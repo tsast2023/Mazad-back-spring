@@ -3,11 +3,12 @@ package com.example.ddashmanagement.Controller;
 import com.example.ddashmanagement.Ennum.EtatCategory;
 import com.example.ddashmanagement.Ennum.StatusCategorie;
 import com.example.ddashmanagement.Ennum.TypeCategory;
-import com.example.ddashmanagement.Entites.Category;
 import com.example.ddashmanagement.Entites.CategoryFille;
 import com.example.ddashmanagement.Services.IServiceCategory;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,8 +26,12 @@ public class CategoryController {
        return iServiceCategory.findAllCategorie() ;
         }
     @PostMapping("/addCategory")
-    public CategoryFille addCategorie(@RequestBody CategoryFille  categorie){
-        return iServiceCategory.createCategorie(categorie);
+    public ResponseEntity<?> addCategorie(@RequestBody CategoryFille  categorie , BindingResult result){
+        if (result.hasErrors()) {
+            return ResponseEntity.badRequest().body("Le libelé de la catégorie ne doit pas être vide");
+        }
+        iServiceCategory.createCategorie(categorie);
+        return ResponseEntity.ok("Catégorie enregistrée avec succès");
     }
     @GetMapping("/findCategories")
     public ResponseEntity<List<CategoryFille>> findCategories(

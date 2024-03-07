@@ -3,7 +3,6 @@ package com.example.ddashmanagement.Services;
 import com.example.ddashmanagement.Ennum.EtatCategory;
 import com.example.ddashmanagement.Ennum.StatusCategorie;
 import com.example.ddashmanagement.Ennum.TypeCategory;
-import com.example.ddashmanagement.Entites.Category;
 import com.example.ddashmanagement.Entites.CategoryFille;
 
 import java.util.List;

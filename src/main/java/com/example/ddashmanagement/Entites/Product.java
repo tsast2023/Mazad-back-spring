@@ -41,7 +41,7 @@ public class Product {
     private Integer prixMazedOnline ;
     private StatusProduct status;
     @DBRef
-    private Category category ;
+    private CategoryFille category ;
     @DBRef
     private CategoryFille categoryFille;
 

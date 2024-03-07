@@ -3,16 +3,13 @@ package com.example.ddashmanagement.Services.Impl;
 import com.example.ddashmanagement.Ennum.EtatCategory;
 import com.example.ddashmanagement.Ennum.StatusCategorie;
 import com.example.ddashmanagement.Ennum.TypeCategory;
-import com.example.ddashmanagement.Entites.Category;
 import com.example.ddashmanagement.Entites.CategoryFille;
 import com.example.ddashmanagement.Repository.CategoryFilleRepository;
-import com.example.ddashmanagement.Repository.CategoryRepository;
 import com.example.ddashmanagement.Services.IServiceCategory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,13 +21,19 @@ public class CategoryService implements IServiceCategory {
 
     @Override
     public CategoryFille createCategorie(CategoryFille c) {
+        System.out.println("CategoryFille" + c);
+        CategoryFille category = new CategoryFille();
         if(c.getCategories().isEmpty()){
-            c.setType(TypeCategory.CATEGORYPARENTE);
+            category.setLibeléCategorie(c.getLibeléCategorie());
+            category.setType(TypeCategory.CATEGORYPARENTE);
+
         }
         else{
-            c.setType(TypeCategory.CATEGORYFILLE);
+            category.setCategories(c.getCategories());
+            category.setLibeléCategorie(c.getLibeléCategorie());
+            category.setType(TypeCategory.CATEGORYFILLE);
         }
-      return categoryFilleRepository.save(c);
+      return categoryFilleRepository.save(category);
 
     }
 
@@ -56,7 +59,7 @@ public class CategoryService implements IServiceCategory {
 
     @Override
     public List<CategoryFille> findAllCategorie() {
-        return categoryFilleRepository.findAll();
+        return categoryFilleRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
     }
 
     @Override
