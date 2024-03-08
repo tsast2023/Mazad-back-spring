@@ -20,6 +20,10 @@ public class DemandesSuperAdmin {
 
     private String adminId ;
 
+    private String productId ;
+
+    private Product product ;
+
     @CreatedDate
     private Instant createdAt;
     @LastModifiedDate
