@@ -13,7 +13,10 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Document
@@ -23,7 +26,6 @@ import java.util.Date;
 public class Enchere {
     @Id
     private String id ;
-    @DBRef
     private Product product ;
     private Integer CoutClic ;
     private Integer CoutParticipation ;
@@ -33,6 +35,12 @@ public class Enchere {
     private Integer ValeurRemboursement ;
     private Date datedeclenchement ;
     private Date datefermeture ;
+    private String ville ;
+    private Integer PrixMagasin ;
+    private Integer PrixMazedOnline ;
+    private Integer NombreParticipant ;
+    private Integer NombreParticipantréel ;
+    private Integer ExtensionTime ;
 
     @CreatedDate
     private Instant createdAt;
@@ -44,7 +52,7 @@ public class Enchere {
 
     private StatusEnchere Status ;
 
-    private OffreEnchere offre ;
+
 
 
 

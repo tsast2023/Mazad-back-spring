@@ -16,6 +16,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 @Document
 @NoArgsConstructor
@@ -42,7 +43,8 @@ public class Product {
 
     private String visiteMagasin ;
     private Integer prixMazedOnline ;
-    private StatusProduct status;
+    private StatusProduct status = StatusProduct.Brouillon;
+    private LocalDateTime publicationDate;
 
     @DBRef
     private CategoryFille category ;

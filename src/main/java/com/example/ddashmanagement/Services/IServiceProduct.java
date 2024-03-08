@@ -4,15 +4,18 @@ import com.example.ddashmanagement.Entites.CategoryFille;
 import com.example.ddashmanagement.Entites.Product;
 import com.example.ddashmanagement.Entites.User;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface IServiceProduct {
 
-    public Product createProduct(Product p);
+    public Product publishProductNow(Product product);
+
+    public Product scheduleProductPublication(Product product, LocalDateTime publicationDate);
 
     public Product findProductById(String id);
     public String DemandeupdateProduct(String id , User userDetails , Product p );
     public List<Product> findAllProduct();
-    public void deleteProduct(Product c);
-    public boolean ProductExists(String id);
+    public String deleteProduct(String id  , User userDetails);
+
 }

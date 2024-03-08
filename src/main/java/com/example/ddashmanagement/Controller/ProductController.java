@@ -2,11 +2,15 @@ package com.example.ddashmanagement.Controller;
 
 import com.example.ddashmanagement.Entites.CategoryFille;
 import com.example.ddashmanagement.Entites.Product;
+import com.example.ddashmanagement.Entites.User;
 import com.example.ddashmanagement.Services.IServiceProduct;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -19,13 +23,17 @@ public class ProductController {
         this.iServiceProduct = iServiceProduct;
     }
 
-    @PostMapping("/addProduct")
-    public ResponseEntity<?> addProduct(@RequestBody Product p , BindingResult result){
-        if (result.hasErrors()) {
-            return ResponseEntity.badRequest().body("Le libelé de produit ne doit pas être vide");
-        }
-         iServiceProduct.createProduct(p);
-        return ResponseEntity.ok("produit enregistrée avec succès" + p);
+    @PostMapping("/publishNow")
+    public ResponseEntity<Product> publishProductNow(@RequestBody Product product) {
+        Product publishedProduct = iServiceProduct.publishProductNow(product);
+        return ResponseEntity.ok(publishedProduct);
+    }
+
+    // Planifier la publication d'un produit
+    @PostMapping("/schedulePublication")
+    public ResponseEntity<Product> scheduleProductPublication(@RequestBody Product product, @RequestParam("publicationDateTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime publicationDateTime) {
+        Product scheduledProduct = iServiceProduct.scheduleProductPublication(product, publicationDateTime);
+        return ResponseEntity.ok(scheduledProduct);
     }
 
     @GetMapping("/getAll")
@@ -37,4 +45,13 @@ public class ProductController {
         return iServiceProduct.findProductById(id);
     }
 
+    @PostMapping("/demandesModicationProduct")
+    public String demandeModificationProduct(@RequestParam String id , @AuthenticationPrincipal User userDetails ,@RequestBody Product p){
+        return iServiceProduct.DemandeupdateProduct(id , userDetails , p);
+
+    }
+    @PostMapping("/delete")
+    public String demandeSuppression (@RequestParam String id  , @AuthenticationPrincipal User userDetails){
+       return iServiceProduct.deleteProduct(id , userDetails);
+    }
 }

@@ -43,6 +43,10 @@ public class User implements UserDetails {
     private Instant updatedAt;
     private RoleUser role ;
 
+    private String notificationToken;
+
+    private String socketId ;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

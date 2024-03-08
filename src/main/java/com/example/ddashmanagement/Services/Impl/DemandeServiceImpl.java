@@ -44,4 +44,14 @@ public class DemandeServiceImpl implements IServiceDemande {
 
         return demandeRepository.save(request);
     }
+
+    @Override
+    public DemandesSuperAdmin DemandeDesactivationProduct(String productId, String adminId) {
+        DemandesSuperAdmin request = new DemandesSuperAdmin();
+        request.setAdminId(adminId);
+        request.setProductId(productId);
+        request.setTypeDemande(TypedeDemande.DemandeDesactivation);
+        return demandeRepository.save(request);
+}
+
 }

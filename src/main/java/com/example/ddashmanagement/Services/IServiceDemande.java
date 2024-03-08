@@ -10,4 +10,6 @@ public interface IServiceDemande {
     List<DemandesSuperAdmin> getAll();
 
     DemandesSuperAdmin DemandeModificationProduct(String productId, String adminId , Product p);
+
+    DemandesSuperAdmin DemandeDesactivationProduct(String productId, String adminId);
 }
