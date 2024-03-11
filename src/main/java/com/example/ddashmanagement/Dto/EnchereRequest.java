@@ -9,8 +9,8 @@ import java.util.List;
 @Data
 public class EnchereRequest {
     private String ville ;
-    private Integer PrixMagasin ;
-    private Integer PrixMazedOnline ;
+    private Integer prixMagasin ;
+    private Integer prixMazedOnline ;
 
     private Product products ;
     private StatusEnchere status = StatusEnchere.Brouillon ;

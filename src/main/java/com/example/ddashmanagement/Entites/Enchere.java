@@ -2,6 +2,7 @@ package com.example.ddashmanagement.Entites;
 
 import com.example.ddashmanagement.Ennum.OffreEnchere;
 import com.example.ddashmanagement.Ennum.StatusEnchere;
+import com.example.ddashmanagement.Ennum.UniteFacilite;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,7 +30,7 @@ public class Enchere {
     private Product product ;
     private Integer CoutClic ;
     private Integer CoutParticipation ;
-    private Integer ValeurMajoration ;
+    private List<Integer> ValeurMajoration ;
     private Integer Facilité ;
     private Boolean Remboursement ;
     private Integer ValeurRemboursement ;
@@ -41,6 +42,14 @@ public class Enchere {
     private Integer NombreParticipant ;
     private Integer NombreParticipantréel ;
     private Integer ExtensionTime ;
+    private  Integer NombreMois ;
+    private Integer prixMazedOnlineFinal ;
+    @DBRef
+    private Collection<User> participants = new ArrayList<>();
+
+    private List<enchérissement> enchérissements ;
+
+    private UniteFacilite unité ;
 
     @CreatedDate
     private Instant createdAt;

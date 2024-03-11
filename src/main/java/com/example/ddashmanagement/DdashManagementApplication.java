@@ -6,6 +6,7 @@ import com.google.firebase.FirebaseOptions;
 import com.google.firebase.messaging.FirebaseMessaging;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.task.TaskSchedulingAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
@@ -15,7 +16,7 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import java.io.IOException;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = {TaskSchedulingAutoConfiguration.class})
 @EnableMongoAuditing
 @EnableScheduling
 public class DdashManagementApplication{

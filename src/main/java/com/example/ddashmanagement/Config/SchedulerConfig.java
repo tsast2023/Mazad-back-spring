@@ -8,7 +8,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 @Configuration
 public class SchedulerConfig {
 
-    @Bean
+    @Bean(name = "monTaskScheduler")
     public TaskScheduler taskScheduler() {
         ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
         scheduler.setPoolSize(5); // Nombre de threads dans le pool. Ajustez selon les besoins de l'application.

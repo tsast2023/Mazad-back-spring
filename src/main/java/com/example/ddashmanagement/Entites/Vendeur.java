@@ -24,7 +24,6 @@ public class Vendeur extends User{
     private Date dateNaissance ;
     private String photoDeProfil ;
     private String SocketId ;
-    @DBRef
-    private Solde solde ;
+
 
 }

@@ -46,6 +46,10 @@ public class User implements UserDetails {
     private String notificationToken;
 
     private String socketId ;
+    private Integer nombreEnchere ;
+    private Integer nombreAchat ;
+
+    private Solde solde ;
 
 
     @Override

@@ -13,8 +13,8 @@ import java.math.BigDecimal;
 @Data
 public class Solde {
     private String id ;
-    private BigDecimal soldeMazed ;
-    private BigDecimal soldeAquisition ;
+    private Integer soldeMazed ;
+    private Integer soldeAquisition ;
     private Acheteur user ;
 
 }

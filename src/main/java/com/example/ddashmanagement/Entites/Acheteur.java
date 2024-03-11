@@ -16,6 +16,4 @@ public class Acheteur extends User {
     private Date dateNaissance ;
     private String photoDeProfil ;
     private String SocketId ;
-    @DBRef
-    private Solde solde ;
 }

@@ -2,6 +2,7 @@ package com.example.ddashmanagement.Services.Impl;
 
 import com.example.ddashmanagement.Ennum.TypedeDemande;
 import com.example.ddashmanagement.Entites.DemandesSuperAdmin;
+import com.example.ddashmanagement.Entites.Enchere;
 import com.example.ddashmanagement.Entites.Product;
 import com.example.ddashmanagement.Repository.DemandeRepository;
 import com.example.ddashmanagement.Services.IServiceDemande;
@@ -46,6 +47,15 @@ public class DemandeServiceImpl implements IServiceDemande {
     }
 
     @Override
+    public DemandesSuperAdmin DemandeModificationEnchere(String enchereID, String adminId, Enchere e) {
+        DemandesSuperAdmin request = new DemandesSuperAdmin();
+        request.setAdminId(adminId);
+        request.setEnchereId(enchereID);
+        request.setTypeDemande(TypedeDemande.DemandeModification);
+        return demandeRepository.save(request);
+    }
+
+    @Override
     public DemandesSuperAdmin DemandeDesactivationProduct(String productId, String adminId) {
         DemandesSuperAdmin request = new DemandesSuperAdmin();
         request.setAdminId(adminId);
@@ -53,5 +63,19 @@ public class DemandeServiceImpl implements IServiceDemande {
         request.setTypeDemande(TypedeDemande.DemandeDesactivation);
         return demandeRepository.save(request);
 }
+
+    @Override
+    public DemandesSuperAdmin DemandeAnnulationEnchere(String EnchereId, String adminId) {
+        DemandesSuperAdmin request = new DemandesSuperAdmin();
+        request.setEnchereId(EnchereId);
+        request.setAdminId(adminId);
+        request.setTypeDemande(TypedeDemande.DemandeAnnulation);
+        return demandeRepository.save(request);
+    }
+
+    @Override
+    public DemandesSuperAdmin findById(String id) {
+        return demandeRepository.findById(id).get();
+    }
 
 }

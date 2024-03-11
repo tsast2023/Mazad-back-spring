@@ -1,5 +1,6 @@
 package com.example.ddashmanagement.Services.Impl;
 
+import com.example.ddashmanagement.Entites.User;
 import com.example.ddashmanagement.Repository.UserRepository;
 import com.example.ddashmanagement.Services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,11 @@ public class UserServiceImpl implements  UserService {
                 return userRepository.findByPseudoOrNumtel(username , username).orElseThrow(() -> new UsernameNotFoundException("User Not Found "));
             }
         };
+    }
+
+    @Override
+    public User findById(String id) {
+        return userRepository.findById(id).get();
     }
 
 
