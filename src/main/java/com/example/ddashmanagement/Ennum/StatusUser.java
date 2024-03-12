@@ -1,12 +1,12 @@
 package com.example.ddashmanagement.Ennum;
 
-public enum StatusVendeur {
+public enum StatusUser {
    BLOQUER("bloqué"),
     DEBLOQUER("débloqué");
 
     private final String defaultValue;
 
-    StatusVendeur(String defaultValue) {
+    StatusUser(String defaultValue) {
         this.defaultValue = defaultValue;
     }
 
@@ -15,7 +15,7 @@ public enum StatusVendeur {
     }
 
     // Exemple d'utilisation d'une méthode pour obtenir une valeur par défaut globale
-    public static StatusVendeur globalDefault() {
+    public static StatusUser globalDefault() {
         return BLOQUER;
     }
 }

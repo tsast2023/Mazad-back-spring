@@ -51,6 +51,9 @@ public class Enchere {
 
     private UniteFacilite unité ;
 
+    private CategoryFille category;
+
+
     @CreatedDate
     private Instant createdAt;
 

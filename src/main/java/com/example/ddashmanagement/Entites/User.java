@@ -1,10 +1,10 @@
 package com.example.ddashmanagement.Entites;
 
 import com.example.ddashmanagement.Ennum.RoleUser;
+import com.example.ddashmanagement.Ennum.StatusUser;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Generated;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
@@ -12,7 +12,6 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -50,6 +49,8 @@ public class User implements UserDetails {
     private Integer nombreAchat ;
 
     private Solde solde ;
+
+    private StatusUser status ;
 
 
     @Override

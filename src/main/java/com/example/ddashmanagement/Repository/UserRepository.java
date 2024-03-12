@@ -8,7 +8,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.Optional;
 @RepositoryRestResource
-public interface UserRepository extends MongoRepository<User, String> {
+public interface UserRepository extends MongoRepository<User, String> , UserCustomRepositpry {
     @Query("{ $or: [ { 'pseudo': ?0 }, { 'numTel': ?1 } ] }")
     Optional<User> findByPseudoOrNumtel(String pseudo, String numTel);
     User findByRole(RoleUser role);

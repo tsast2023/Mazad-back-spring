@@ -4,6 +4,7 @@ import com.example.ddashmanagement.Ennum.EtatCategory;
 import com.example.ddashmanagement.Ennum.StatusCategorie;
 import com.example.ddashmanagement.Ennum.TypeCategory;
 import com.example.ddashmanagement.Entites.CategoryFille;
+import com.example.ddashmanagement.Entites.DemandesSuperAdmin;
 import com.example.ddashmanagement.Entites.User;
 import com.example.ddashmanagement.Repository.CategoryFilleRepository;
 import com.example.ddashmanagement.Services.IServiceCategory;
@@ -76,10 +77,7 @@ public class CategoryServiceImpl implements IServiceCategory {
         }
     }
 
-    @Override
-    public boolean categorieExists(String id) {
-        return categoryFilleRepository.existsById(id);
-    }
+
 
     @Override
     public String ChangerStatusDemande(String idCategory, User userDetails) {
@@ -141,8 +139,36 @@ public class CategoryServiceImpl implements IServiceCategory {
         return categoryFilleRepository.findByCriteria(etat.orElse(null), type.orElse(null), status.orElse(null));
     }
 
+    @Override
+    public String validerChangementStatusCategorie(String idDemande) {
+        Optional<DemandesSuperAdmin> demandeOptional = Optional.ofNullable(iServiceDemande.findById(idDemande));
+
+        if (demandeOptional.isPresent()) {
+            DemandesSuperAdmin demande = demandeOptional.get();
+            Optional<CategoryFille> categoryOptional = categoryFilleRepository.findById(demande.getCategoryId());
+
+            if (categoryOptional.isPresent()) {
+                CategoryFille category = categoryOptional.get();
+                category.setStatus(StatusCategorie.DESACTIVER);
+                categoryFilleRepository.save(category);
+
+                // Supposons que vous avez un champ status dans DemandeDesactivation
 
 
+                // Envoyer la notification à l'utilisateur
+                // User user = demande.getUser(); // Supposons que DemandeDesactivation a un lien vers User
+                //  String message = "Votre demande de désactivation pour la catégorie " + category.getNom() + " a été validée.";
+                // notificationService.envoyerNotification(user, message);
 
+                return "Le statut de la catégorie a été mis à jour avec succès. Notification envoyée à l'utilisateur.";
+            } else {
+                return "Catégorie non trouvée pour l'identifiant: " + demande.getCategoryId();
+            }
+        } else {
+            return "Demande de désactivation non trouvée pour l'identifiant: " + idDemande;
+        }
+
+
+    }
 
 }

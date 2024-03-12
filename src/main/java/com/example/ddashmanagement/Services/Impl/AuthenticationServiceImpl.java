@@ -5,6 +5,7 @@ import com.example.ddashmanagement.Dto.RefreshTokenRequest;
 import com.example.ddashmanagement.Dto.SignInRequest;
 import com.example.ddashmanagement.Dto.SignUpRequest;
 import com.example.ddashmanagement.Ennum.RoleUser;
+import com.example.ddashmanagement.Ennum.StatusUser;
 import com.example.ddashmanagement.Entites.Acheteur;
 import com.example.ddashmanagement.Entites.User;
 import com.example.ddashmanagement.Entites.Vendeur;
@@ -61,6 +62,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             vendeur.setNomSociete(signUpRequest.getNomSociete());
             vendeur.setType(signUpRequest.getType());
             vendeur.setNumTel(signUpRequest.getNumTel());
+            vendeur.setStatus(StatusUser.BLOQUER);
             userRepository.save(vendeur);
             return vendeur;
 

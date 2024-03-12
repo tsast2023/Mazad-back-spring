@@ -3,10 +3,7 @@ package com.example.ddashmanagement.Services.Impl;
 import com.example.ddashmanagement.Dto.ConfigPredéfiniesEnchere;
 import com.example.ddashmanagement.Dto.EnchereRequest;
 import com.example.ddashmanagement.Ennum.StatusEnchere;
-import com.example.ddashmanagement.Entites.DemandesSuperAdmin;
-import com.example.ddashmanagement.Entites.Enchere;
-import com.example.ddashmanagement.Entites.Solde;
-import com.example.ddashmanagement.Entites.User;
+import com.example.ddashmanagement.Entites.*;
 import com.example.ddashmanagement.Repository.EnchereRepository;
 import com.example.ddashmanagement.Repository.UserRepository;
 import com.example.ddashmanagement.Services.IEnchereService;
@@ -106,14 +103,14 @@ public class EnchereServiceImpl implements IEnchereService {
         e.setNombreParticipant(enchere.getNombreParticipant());
         e.setDatedeclenchement(enchere.getDatedeclenchement());
         e.setDatefermeture(enchere.getDatefermeture());
-        Enchere savedProduct = enchereRepository.save(e);
+        Enchere savedBid = enchereRepository.save(e);
 
         taskScheduler.schedule(() -> {
-            savedProduct.setStatus(StatusEnchere.Ouverte);
-            enchereRepository.save(savedProduct);
+            savedBid.setStatus(StatusEnchere.Ouverte);
+            enchereRepository.save(savedBid);
         }, java.sql.Timestamp.valueOf(publicationDate));
 
-        return savedProduct;
+        return savedBid;
     }
 
     @Override
@@ -145,12 +142,12 @@ public class EnchereServiceImpl implements IEnchereService {
                 return "Demande de modification envoyée avec succées.";
 
             } else {
-                return "Le produit n'est pas publié et ne peut pas être modifié.";
+                return "L'enchere n'est pas publié et ne peut pas être modifié.";
             }
         }
         else {
             // Gérer le cas où le produit n'est pas trouvé
-            return "Produit non trouvé pour l'identifiant: " + enchereId;
+            return "Enchere non trouvé pour l'identifiant: " + enchereId;
         }
     }
 
@@ -245,8 +242,42 @@ public class EnchereServiceImpl implements IEnchereService {
         enchere.setDatefermeture(demandeModification.getEnchere().getDatefermeture());
         enchere.setProduct(demandeModification.getEnchere().getProduct());
         enchere.setFacilité(demandeModification.getEnchere().getFacilité());
+        enchere.setDatedeclenchement(demandeModification.getEnchere().getDatedeclenchement());
+        enchere.setDatefermeture(demandeModification.getEnchere().getDatefermeture());
+        enchere.setStatus(demandeModification.getEnchere().getStatus());
+        enchere.setPrixMagasin(demandeModification.getEnchere().getPrixMagasin());
+        enchere.setFacilité(demandeModification.getEnchere().getFacilité());
+        enchere.setPrixMazedOnline(demandeModification.getEnchere().getPrixMazedOnline());
+        enchere.setNombreParticipant(demandeModification.getEnchere().getNombreParticipant());
+        enchere.setValeurMajoration(demandeModification.getEnchere().getValeurMajoration());
         enchereRepository.save(enchere);
+
+        // Envoi de la notification push à l'administrateur qui a fait la demande
+       // String adminId = demandeModification.getAdminId(); // Supposition que vous avez un champ adminId dans votre objet demande
+       // String notificationToken = getAdminNotificationToken(adminId); // Vous devez implémenter cette méthode pour récupérer le token de notification de l'admin
+       // String message = "Votre demande de modification a été validée.";
+        ///sendPushNotification(notificationToken, message); // Vous devez implémenter cette méthode
+
         return "La demande de modification a été validée et les modifications appliquées.";
+    }
+
+    @Override
+    public List<Enchere> findEnchere(Optional<CategoryFille> category, Optional<StatusEnchere> status) {
+        return enchereRepository.findByStatusOrCategory(status.orElse(null) , category.orElse(null));
+    }
+
+    @Override
+    public Enchere epinglerEnchere(String id) {
+        Enchere e = enchereRepository.findById(id).get();
+        e.setStatus(StatusEnchere.Terminée);
+        return enchereRepository.save(e);
+    }
+
+    @Override
+    public Enchere desepinglerEnchere(String id, Integer nombreMois) {
+        Enchere e = enchereRepository.findById(id).get();
+        e.setNombreMois(nombreMois);
+        return enchereRepository.save(e);
     }
 
 

@@ -18,8 +18,11 @@ public interface IServiceCategory {
     public CategoryFille updateCategorie(String id ,CategoryFille c);
     public List<CategoryFille> findAllCategorie();
     public void deleteCategorie(CategoryFille c);
-    public boolean categorieExists(String id);
+
 
     String ChangerStatusDemande(String idCategory , User userDetails);
     List<CategoryFille> findCategories(Optional<EtatCategory> etat, Optional<StatusCategorie> status, Optional<TypeCategory> type);
+
+    public String validerChangementStatusCategorie(String idDemande);
 }
+

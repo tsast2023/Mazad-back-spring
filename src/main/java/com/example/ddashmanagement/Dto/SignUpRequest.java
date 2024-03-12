@@ -1,11 +1,9 @@
 package com.example.ddashmanagement.Dto;
 
 import com.example.ddashmanagement.Ennum.RoleUser;
-import com.example.ddashmanagement.Ennum.StatusVendeur;
+import com.example.ddashmanagement.Ennum.StatusUser;
 import com.example.ddashmanagement.Ennum.TypeVendeur;
-import jakarta.validation.constraints.Email;
 import lombok.Data;
-import org.springframework.data.mongodb.core.index.Indexed;
 
 import java.util.Date;
 
@@ -22,7 +20,7 @@ public class SignUpRequest {
     private String ImgCin;
     private Integer Cin ;
     private String Patente ;
-    private StatusVendeur Status ;
+    private StatusUser Status ;
     private TypeVendeur type ;
     private String NomSociete ;
     private RoleUser role ;
