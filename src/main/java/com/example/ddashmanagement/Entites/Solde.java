@@ -15,6 +15,8 @@ public class Solde {
     private String id ;
     private Integer soldeMazed ;
     private Integer soldeAquisition ;
-    private Acheteur user ;
+    private User user ;
+    private recharge recharge ;
+
 
 }

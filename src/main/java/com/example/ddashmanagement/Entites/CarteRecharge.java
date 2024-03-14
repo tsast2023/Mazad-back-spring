@@ -1,5 +1,6 @@
 package com.example.ddashmanagement.Entites;
 
+import com.example.ddashmanagement.Ennum.StatusCarte;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,9 @@ public class CarteRecharge {
     @Id
     private String Id ;
     private String NumSérie ;
-    private BigDecimal valeur ;
+    private Integer valeur ;
+    private boolean bonusRecharge ;
+    private Integer valeurBonusRecharge ;
+    private StatusCarte statuscarte ;
 
 }
