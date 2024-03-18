@@ -25,6 +25,8 @@ public class DemandesSuperAdmin {
     private Product product ;
     private Enchere enchere ;
 
+    private String vendeurId ;
+
     private String enchereId;
     @CreatedDate
     private Instant createdAt;

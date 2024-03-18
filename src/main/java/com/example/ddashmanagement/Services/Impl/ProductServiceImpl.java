@@ -10,6 +10,7 @@ import com.example.ddashmanagement.Repository.ProductRepository;
 import com.example.ddashmanagement.Services.IServiceDemande;
 import com.example.ddashmanagement.Services.IServiceProduct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.stereotype.Service;
@@ -133,6 +134,26 @@ public class ProductServiceImpl implements IServiceProduct {
 
        }
 
+    }
+
+    @Override
+    public Product DeposerProductVendeur(Product p) {
+        return null;
+    }
+
+    @Override
+    public List<Product> getProductsOfTypeProductTrue() {
+        return productRepository.findByTypeProductTrue();
+    }
+
+    @Override
+    public List<Product> getFirst20ProductsOrderByPublicationDate() {
+        return productRepository.findTop20ByOrderByPublicationDateAsc(PageRequest.of(0, 20));
+    }
+
+    @Override
+    public List<Product> getLatestPromotionProducts() {
+        return productRepository.findTop20ByPromotionTrueOrderByCreatedAtDesc(PageRequest.of(0, 20));
     }
 
 

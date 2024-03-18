@@ -5,7 +5,7 @@ public enum TypedeDemande {
     demandeActivation,
     DemandeModification,
 
-    DemandeSuppression ,
+    DemandeSuppression,
 
     DemandeAnnulation
 

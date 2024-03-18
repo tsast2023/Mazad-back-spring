@@ -18,4 +18,12 @@ public interface IServiceProduct {
     public List<Product> findAllProduct();
     public String deleteProduct(String id  , User userDetails);
 
+    public  Product DeposerProductVendeur(Product p) ;
+
+    public List<Product> getProductsOfTypeProductTrue();
+
+    List<Product> getFirst20ProductsOrderByPublicationDate();
+
+    List<Product> getLatestPromotionProducts();
+
 }

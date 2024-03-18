@@ -19,5 +19,8 @@ public interface IServiceDemande {
     DemandesSuperAdmin DemandeAnnulationEnchere(String EnchereId, String adminId);
     DemandesSuperAdmin findById(String id);
 
+    DemandesSuperAdmin DemandeAcceptationVendeur(String userId);
+
+
 
 }

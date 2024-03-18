@@ -3,10 +3,11 @@ package com.example.ddashmanagement.Services.Impl;
 import com.example.ddashmanagement.Dto.SignUpRequest;
 import com.example.ddashmanagement.Ennum.RoleUser;
 import com.example.ddashmanagement.Ennum.StatusUser;
-import com.example.ddashmanagement.Entites.Solde;
-import com.example.ddashmanagement.Entites.User;
-import com.example.ddashmanagement.Entites.Vendeur;
+import com.example.ddashmanagement.Ennum.StatusVendeur;
+import com.example.ddashmanagement.Entites.*;
 import com.example.ddashmanagement.Repository.UserRepository;
+import com.example.ddashmanagement.Repository.VendeurRepository;
+import com.example.ddashmanagement.Services.IServiceDemande;
 import com.example.ddashmanagement.Services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,17 +22,20 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserServiceImpl implements  UserService  {
     private final UserRepository userRepository;
+    private final IServiceDemande iServiceDemande ;
+    private final VendeurRepository vendeurRepository ;
+    private final EmailService emailService ;
 
     @Override
     public UserDetailsService userDetailsService(){
         return new UserDetailsService() {
             @Override
             public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-               User user =  userRepository.findByPseudoOrNumtel(username , username).orElseThrow(() -> new UsernameNotFoundException("User Not Found "));
-               if(user.getStatus().equals(StatusUser.BLOQUER)){
+              return userRepository.findByPseudoOrNumtel(username , username).orElseThrow(() -> new UsernameNotFoundException("User Not Found "));
+              /* if(user.getStatus().equals(StatusUser.BLOQUER)){
                    throw new UsernameNotFoundException("User is blocked and cannot log in");
             }
-               return user ;
+               return user ;*/
             }
         };
     }
@@ -91,6 +95,23 @@ public class UserServiceImpl implements  UserService  {
         vendeur.setNumTel(signUpRequest.getNumTel());
         vendeur.setStatus(StatusUser.BLOQUER);
         return userRepository.save(vendeur);
+    }
+
+    @Override
+    public String AcceptationVendeur(String demandeId) {
+        DemandesSuperAdmin demandeAcceptaion = iServiceDemande.findById(demandeId);
+        Optional<User> vendeurOptional = userRepository.findById(demandeAcceptaion.getVendeurId());
+        if(vendeurOptional.isPresent()){
+            Vendeur v = (Vendeur) vendeurOptional.get();
+            v.setStatusVendeur(StatusVendeur.ACCEPTER);
+            userRepository.save(v);
+            emailService.sendEmail(v.getEmail(), "" , "");
+            return "email de validation de compte envoyer avec succées";
+        }
+        else {
+            return "email non envoyer" ;
+        }
+
     }
 
 

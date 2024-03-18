@@ -28,6 +28,9 @@ public class Ventes {
     @DBRef
     private Acheteur acheteur;
 
+    @DBRef
+    private Avis avis ;
+
     @CreatedDate
     private Instant createdAt;
     @LastModifiedDate

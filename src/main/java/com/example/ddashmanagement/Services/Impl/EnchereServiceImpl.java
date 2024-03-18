@@ -10,6 +10,7 @@ import com.example.ddashmanagement.Services.IEnchereService;
 import com.example.ddashmanagement.Services.IServiceDemande;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.stereotype.Service;
@@ -299,7 +300,27 @@ public class EnchereServiceImpl implements IEnchereService {
         source.setProduct(modifications.getProduct());
     }
 
+    public List<Enchere> getFirst20EncheresByStatus(StatusEnchere status) {
+        return enchereRepository.findTop20ByStatusOrderByDatedeclenchementAsc(status, PageRequest.of(0, 20));
     }
+
+    @Override
+    public List<Enchere> getEncheresGratuit() {
+        return enchereRepository.findByCoutParticipationOrCoutClic(0, 0);
+    }
+
+    @Override
+    public List<Enchere> getTop20EncheresByStatusAndCategory(StatusEnchere status, String categoryId) {
+        return enchereRepository.findTop20ByStatusAndCategory_IdOrderByCreatedAtDesc(status, categoryId, PageRequest.of(0, 20));
+    }
+
+    @Override
+    public List<Enchere> getEncheresByCategory(String categoryId) {
+        return enchereRepository.findByCategory_Id(categoryId);
+    }
+
+
+}
 
 
 

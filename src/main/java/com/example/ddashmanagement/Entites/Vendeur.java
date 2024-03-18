@@ -1,6 +1,7 @@
 package com.example.ddashmanagement.Entites;
 
 import com.example.ddashmanagement.Ennum.StatusUser;
+import com.example.ddashmanagement.Ennum.StatusVendeur;
 import com.example.ddashmanagement.Ennum.TypeVendeur;
 import lombok.Data;
 import org.springframework.data.annotation.TypeAlias;
@@ -23,6 +24,10 @@ public class Vendeur extends User{
 
     @DBRef
     private List<Ventes> ventes;
+
+    private StatusVendeur statusVendeur ;
+
+
 
 
 }

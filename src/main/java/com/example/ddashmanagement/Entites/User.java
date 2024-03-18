@@ -11,6 +11,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -51,6 +52,12 @@ public class User implements UserDetails {
     private Solde solde ;
 
     private StatusUser status ;
+    @DBRef
+    private Favoris favoris ;
+    @DBRef
+    private Commandes commandes ;
+
+
 
 
     @Override

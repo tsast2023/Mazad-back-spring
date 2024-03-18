@@ -54,4 +54,19 @@ public class ProductController {
     public String demandeSuppression (@RequestParam String id  , @AuthenticationPrincipal User userDetails){
        return iServiceProduct.deleteProduct(id , userDetails);
     }
+    /************* mobile*****************************/
+    @GetMapping("/AlaUne")
+    public List<Product> getProductsOfTypeProductTrue() {
+        return iServiceProduct.getProductsOfTypeProductTrue();
+    }
+
+    @GetMapping("/top20")
+    public List<Product> getFirst20ProductsOrderByPublicationDate() {
+        return iServiceProduct.getFirst20ProductsOrderByPublicationDate();
+    }
+
+    @GetMapping("/promotions")
+    public List<Product> getLatestPromotionProducts() {
+        return iServiceProduct.getLatestPromotionProducts();
+    }
 }

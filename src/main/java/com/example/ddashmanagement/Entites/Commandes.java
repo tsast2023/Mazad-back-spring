@@ -4,14 +4,23 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+import java.util.ArrayList;
+import java.util.Collection;
+
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-public class Avis {
+@Document
+public class Commandes {
+
     @Id
     private String id ;
-    private Integer evaluation ;
+    @DBRef
+    private Collection<Product> listProduct = new ArrayList<>();
+    @DBRef
+    private Collection<Enchere> listEnchere = new ArrayList<>() ;
+
 }

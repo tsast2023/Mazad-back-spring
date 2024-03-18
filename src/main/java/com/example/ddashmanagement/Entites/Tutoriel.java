@@ -3,15 +3,16 @@ package com.example.ddashmanagement.Entites;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+@Data
 @Document
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-public class Avis {
-    @Id
+public class Tutoriel {
     private String id ;
-    private Integer evaluation ;
+    private String file ;
+    private String description ;
+    private Integer ordre ;
+
 }

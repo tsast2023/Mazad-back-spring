@@ -39,7 +39,9 @@ public class Product {
     private List<String> couleurs ;
     private String codeABarre ;
     private String qrCode ;
-    private String fournisseur ;
+
+    private Boolean TypeProduct ;
+
 
     private String visiteMagasin ;
     private Integer prixMazedOnline ;
@@ -61,4 +63,5 @@ public class Product {
 
     @LastModifiedDate
     private Instant updatedAt;
+    private Boolean promotion ;
 }

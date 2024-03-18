@@ -10,7 +10,7 @@ public class Publication {
     @DBRef
     private Product product ;
     @DBRef
-    private Enchere enchere ;
+    private Enchere enchere;
 
     @DBRef
     private Administrateur administrateur;

@@ -45,6 +45,15 @@ public interface IEnchereService {
 
     public Enchere desepinglerEnchere(String  id  , Integer nombreMois);
 
+    List<Enchere> getFirst20EncheresByStatus(StatusEnchere status);
+
+    List<Enchere> getEncheresGratuit();
+
+    List<Enchere> getTop20EncheresByStatusAndCategory(StatusEnchere status, String categoryId);
+
+    public List<Enchere> getEncheresByCategory(String categoryId) ;
+
+
 
 
 }

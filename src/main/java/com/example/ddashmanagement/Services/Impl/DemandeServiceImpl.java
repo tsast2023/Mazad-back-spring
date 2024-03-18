@@ -78,4 +78,12 @@ public class DemandeServiceImpl implements IServiceDemande {
         return demandeRepository.findById(id).get();
     }
 
+    @Override
+    public DemandesSuperAdmin DemandeAcceptationVendeur(String userId) {
+        DemandesSuperAdmin request = new DemandesSuperAdmin();
+        request.setVendeurId(userId);
+        request.setTypeDemande(TypedeDemande.demandeActivation);
+        return demandeRepository.save(request);
+    }
+
 }

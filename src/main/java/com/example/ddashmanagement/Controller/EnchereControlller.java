@@ -137,5 +137,27 @@ public class EnchereControlller {
         Enchere enchere = iEnchereService.desepinglerEnchere(id, nombreMois);
         return ResponseEntity.ok(enchere);
     }
+
+    @GetMapping("/status/{status}")
+    public List<Enchere> getPremieresEncheresByStatus(@PathVariable StatusEnchere status) {
+        return iEnchereService.getFirst20EncheresByStatus(StatusEnchere.valueOf(String.valueOf(status)));
+    }
+
+    @GetMapping("/gratuites")
+    public List<Enchere> getEncheresGratuites() {
+        return iEnchereService.getEncheresGratuit();
+    }
+
+    @GetMapping("/status/{status}/category/{categoryId}")
+    public List<Enchere> getTop20EncheresByStatusAndCategory(@PathVariable StatusEnchere status, @PathVariable String categoryId) {
+        return iEnchereService.getTop20EncheresByStatusAndCategory(StatusEnchere.valueOf(String.valueOf(status)), categoryId);
+    }
+
+    @GetMapping("/category/{categoryId}")
+    public List<Enchere> getEncheresByCategory(@PathVariable String categoryId) {
+        return iEnchereService.getEncheresByCategory(categoryId);
+    }
+
+
 }
 

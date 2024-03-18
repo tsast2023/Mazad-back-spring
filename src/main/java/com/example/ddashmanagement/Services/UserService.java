@@ -32,5 +32,7 @@ public interface UserService {
     User Createvendeur(SignUpRequest signUpRequest);
 
 
+    String AcceptationVendeur(String demandeId);
+
 
 }
